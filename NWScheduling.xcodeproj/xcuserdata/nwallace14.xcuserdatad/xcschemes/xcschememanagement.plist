@@ -4,6 +4,11 @@
 <dict>
 	<key>SchemeUserState</key>
 	<dict>
+		<key>NWScheduling.xcscheme</key>
+		<dict>
+			<key>orderHint</key>
+			<integer>1</integer>
+		</dict>
 		<key>NWSchedulingTest.xcscheme</key>
 		<dict>
 			<key>orderHint</key>
@@ -13,6 +18,16 @@
 	<key>SuppressBuildableAutocreation</key>
 	<dict>
 		<key>82FA165816FE5DC400498806</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>82FA166C16FE607600498806</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>82FA167A16FE607700498806</key>
 		<dict>
 			<key>primary</key>
 			<true/>
