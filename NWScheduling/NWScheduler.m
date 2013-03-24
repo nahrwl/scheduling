@@ -9,7 +9,6 @@
 #import "NWScheduler.h"
 #import <mach/mach.h>
 #import <mach/mach_time.h>
-// #import <libkern/OSAtomic.h>
 #import "pthread.h"
 
 // the shared instance
@@ -91,7 +90,7 @@ void thread_sig(int signal);
                               [NSNumber numberWithUnsignedLongLong:absTime], kTimeKey,
                               NSStringFromSelector(event), kSelectorKey,
                               target, kTargetKey, nil];
-    NSLog(@"Event absolute time: %lld",[[newEvent objectForKey:kTimeKey] unsignedLongLongValue]);
+    //NSLog(@"Event absolute time: %lld",[[newEvent objectForKey:kTimeKey] unsignedLongLongValue]);
     [self addEvent:newEvent];
     
 }
@@ -125,7 +124,7 @@ void thread_sig(int signal);
     // wake the thread from sleeping if it needs to look at our new event first
     if (needsWake) {
         // wake the thread
-        //pthread_kill(eventThread, SIGALRM);
+        pthread_kill(eventThread, SIGALRM);
     }
     
 }
@@ -191,8 +190,8 @@ void *thread_start(void* arg) {
 void thread_sig(int signal) { }
 
 - (void)thread {
-    NSLog(@"Please log this");
-    //signal(SIGALRM, thread_sig);
+    // NSLog(@"Please log this");
+    signal(SIGALRM, thread_sig);
     // Lock the mutex.
     [condition lock];
     
@@ -200,7 +199,7 @@ void thread_sig(int signal) { }
         while ([_schedule count] == 0) {
             [condition wait];
         }
-        NSLog(@"Made it past while loop");
+        // NSLog(@"Made it past while loop");
         //NSAutoreleasePool *pool = [[NSAutoreleasePool alloc] init];
         NSDictionary *upcomingEvent = [_schedule objectAtIndex:0];
         UInt64 absTime = [[upcomingEvent objectForKey:kTimeKey] unsignedLongLongValue];
@@ -209,9 +208,9 @@ void thread_sig(int signal) { }
         
         // sleep until we have to spinlock
         uint64_t wakeTime = (absTime - (kSpinlockTime / kAbsoluteToNanosecondsRatio));
-        NSLog(@"Arrived at mach_wait_until");
+        // NSLog(@"Arrived at mach_wait_until");
         mach_wait_until(wakeTime);
-        NSLog(@"Made it past mach_wait_until");
+        // NSLog(@"Made it past mach_wait_until");
         // make sure we haven't woken up early
         if (mach_absolute_time() >= wakeTime) {
             
