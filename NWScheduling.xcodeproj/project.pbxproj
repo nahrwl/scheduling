@@ -7,12 +7,12 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		8254E45616FECAD70095E3FC /* libNWScheduling.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 82FA166D16FE607600498806 /* libNWScheduling.a */; };
 		82FA165D16FE5DC400498806 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 82FA165C16FE5DC400498806 /* Foundation.framework */; };
 		82FA166016FE5DC400498806 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 82FA165F16FE5DC400498806 /* main.m */; };
 		82FA166416FE5DC400498806 /* NWSchedulingTest.1 in CopyFiles */ = {isa = PBXBuildFile; fileRef = 82FA166316FE5DC400498806 /* NWSchedulingTest.1 */; };
 		82FA166E16FE607600498806 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 82FA165C16FE5DC400498806 /* Foundation.framework */; };
 		82FA167D16FE607700498806 /* SenTestingKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 82FA167C16FE607700498806 /* SenTestingKit.framework */; };
-		82FA167F16FE607700498806 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 82FA167E16FE607700498806 /* UIKit.framework */; };
 		82FA168016FE607700498806 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 82FA165C16FE5DC400498806 /* Foundation.framework */; };
 		82FA168316FE607700498806 /* libNWScheduling.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 82FA166D16FE607600498806 /* libNWScheduling.a */; };
 		82FA168916FE607700498806 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 82FA168716FE607700498806 /* InfoPlist.strings */; };
@@ -63,7 +63,6 @@
 		82FA167116FE607600498806 /* NWScheduling-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "NWScheduling-Prefix.pch"; sourceTree = "<group>"; };
 		82FA167B16FE607700498806 /* NWSchedulingTests.octest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = NWSchedulingTests.octest; sourceTree = BUILT_PRODUCTS_DIR; };
 		82FA167C16FE607700498806 /* SenTestingKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SenTestingKit.framework; path = Library/Frameworks/SenTestingKit.framework; sourceTree = DEVELOPER_DIR; };
-		82FA167E16FE607700498806 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = Library/Frameworks/UIKit.framework; sourceTree = DEVELOPER_DIR; };
 		82FA168616FE607700498806 /* NWSchedulingTests-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "NWSchedulingTests-Info.plist"; sourceTree = "<group>"; };
 		82FA168816FE607700498806 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		82FA168A16FE607700498806 /* NWSchedulingTests.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = NWSchedulingTests.h; sourceTree = "<group>"; };
@@ -78,6 +77,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				8254E45616FECAD70095E3FC /* libNWScheduling.a in Frameworks */,
 				82FA165D16FE5DC400498806 /* Foundation.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -95,7 +95,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				82FA167D16FE607700498806 /* SenTestingKit.framework in Frameworks */,
-				82FA167F16FE607700498806 /* UIKit.framework in Frameworks */,
 				82FA168016FE607700498806 /* Foundation.framework in Frameworks */,
 				82FA168316FE607700498806 /* libNWScheduling.a in Frameworks */,
 			);
@@ -131,7 +130,6 @@
 			children = (
 				82FA165C16FE5DC400498806 /* Foundation.framework */,
 				82FA167C16FE607700498806 /* SenTestingKit.framework */,
-				82FA167E16FE607700498806 /* UIKit.framework */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -430,6 +428,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
+				ARCHS = "$(NATIVE_ARCH_ACTUAL)";
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
 				CLANG_CXX_LIBRARY = "libc++";
 				CLANG_ENABLE_OBJC_ARC = YES;
@@ -457,7 +456,7 @@
 				ONLY_ACTIVE_ARCH = YES;
 				OTHER_LDFLAGS = "-ObjC";
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				SDKROOT = iphoneos;
+				SDKROOT = "";
 				SKIP_INSTALL = YES;
 			};
 			name = Debug;
@@ -466,6 +465,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
+				ARCHS = "$(NATIVE_ARCH_ACTUAL)";
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
 				CLANG_CXX_LIBRARY = "libc++";
 				CLANG_ENABLE_OBJC_ARC = YES;
@@ -485,7 +485,7 @@
 				IPHONEOS_DEPLOYMENT_TARGET = 6.1;
 				OTHER_LDFLAGS = "-ObjC";
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				SDKROOT = iphoneos;
+				SDKROOT = "";
 				SKIP_INSTALL = YES;
 				VALIDATE_PRODUCT = YES;
 			};
@@ -590,6 +590,7 @@
 				82FA168E16FE607700498806 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		82FA169216FE607700498806 /* Build configuration list for PBXNativeTarget "NWSchedulingTests" */ = {
 			isa = XCConfigurationList;
@@ -598,6 +599,7 @@
 				82FA169016FE607700498806 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
