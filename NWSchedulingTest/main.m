@@ -2,7 +2,7 @@
 //  main.m
 //  NWSchedulingTest
 //
-//  Created by Nathanael Wallace on 3/23/13.
+//  Created by Nathan W on 3/23/13.
 //
 //
 
