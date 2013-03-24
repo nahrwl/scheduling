@@ -38,9 +38,12 @@ int main(int argc, const char * argv[])
 
     @autoreleasepool {
         SchedulingTest *test = [[SchedulingTest alloc] init];
+        NSTimeInterval duration = 1.0;
+        [NWScheduler scheduleEvent:@selector(timerFire) target:test inSeconds:duration];
+        [NSThread sleepForTimeInterval:1];
+        //[NWScheduler scheduleEvent:@selector(timerFire) target:test inSeconds:10];
         
-        [NWScheduler scheduleEvent:@selector(timerFire) target:test inSeconds:10];
-        [NWScheduler scheduleEvent:@selector(timerFire) target:test inSeconds:10];
+        [[NSRunLoop currentRunLoop] runUntilDate:[NSDate dateWithTimeIntervalSinceNow:duration + 0.1]];
         
     }
     return 0;

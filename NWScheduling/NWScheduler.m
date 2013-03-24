@@ -13,7 +13,7 @@
 #import "pthread.h"
 
 // the shared instance
-static NWScheduler *_sharedScheduler;
+static NWScheduler *_sharedScheduler = nil;
 
 // conversion factor for mach_absolute_time()
 static volatile long double kAbsoluteToNanosecondsRatio;
@@ -27,14 +27,10 @@ static NSString *kTimeKey = @"nanoseconds";
 #define kSpinlockTime 0.01
 
 @interface NWScheduler () {
-    //OSSpinLock spinlock;
-    pthread_mutex_t mutex;
-    pthread_cond_t condition;
-    
+    NSCondition *condition;
+    NSMutableArray *_schedule;
     pthread_t eventThread;
 }
-
-@property (retain) NSMutableArray *schedule;
 
 // Define instance method counterparts to public class methods
 // No need for the ..inSeconds: methods because we'll just convert to nanoseconds
@@ -53,7 +49,6 @@ void thread_sig(int signal);
 @end
 
 @implementation NWScheduler
-@synthesize schedule = _schedule;
 
 #pragma mark - Main thread -
 #pragma mark Public Methods
@@ -96,6 +91,7 @@ void thread_sig(int signal);
                               [NSNumber numberWithUnsignedLongLong:absTime], kTimeKey,
                               NSStringFromSelector(event), kSelectorKey,
                               target, kTargetKey, nil];
+    NSLog(@"Event absolute time: %lld",[[newEvent objectForKey:kTimeKey] unsignedLongLongValue]);
     [self addEvent:newEvent];
     
 }
@@ -114,23 +110,22 @@ void thread_sig(int signal);
     UInt64 absTime = [[newEvent objectForKey:kTimeKey] unsignedLongLongValue];
     int i = 0;
     // insert the event into the array, but remember to lock
-    pthread_mutex_lock(&mutex); // try and minimize the amount of code that executes inside lock
+    [condition lock]; // try and minimize the amount of code that executes inside lock
     // add event at the correct place by time
-    if ([_schedule count] > 0) {
-        while (absTime > [(NSNumber *)[(NSDictionary *)[_schedule objectAtIndex:i] objectForKey:kTimeKey] unsignedLongLongValue]) {
-            i++;
-        }
+    while (([_schedule count] > i) && (absTime > [(NSNumber *)[(NSDictionary *)[_schedule objectAtIndex:i] objectForKey:kTimeKey] unsignedLongLongValue])) {
+        i++;
     }
     [_schedule insertObject:newEvent atIndex:i];
     if (([_schedule count] > 0) && ([newEvent isEqualToDictionary:[_schedule objectAtIndex:0]]))
         needsWake = YES;
-    pthread_mutex_unlock(&mutex);
+    [condition signal];
+    [condition unlock];
     
     // check if our event will occur before the first event
     // wake the thread from sleeping if it needs to look at our new event first
     if (needsWake) {
         // wake the thread
-        pthread_kill(eventThread, SIGALRM);
+        //pthread_kill(eventThread, SIGALRM);
     }
     
 }
@@ -152,8 +147,7 @@ void thread_sig(int signal);
         mach_timebase_info(&tbdata);
         kAbsoluteToNanosecondsRatio = ((long double) tbdata.numer) / ((long double) tbdata.denom);
         
-        pthread_mutex_init(&mutex, NULL);
-        pthread_cond_init(&condition, NULL);
+        condition = [[NSCondition alloc] init];
         
         
         _schedule = [[NSMutableArray alloc] init];
@@ -197,26 +191,27 @@ void *thread_start(void* arg) {
 void thread_sig(int signal) { }
 
 - (void)thread {
-    // signal(SIGALRM, thread_sig);
+    NSLog(@"Please log this");
+    //signal(SIGALRM, thread_sig);
     // Lock the mutex.
-    pthread_mutex_lock(&mutex);
+    [condition lock];
     
-    while (YES) {
+    while (1) {
         while ([_schedule count] == 0) {
-            int err = pthread_cond_wait(&condition, &mutex);
-            NSLog(@"pthread_cond_wait condition: %d",err);
+            [condition wait];
         }
-        
+        NSLog(@"Made it past while loop");
         //NSAutoreleasePool *pool = [[NSAutoreleasePool alloc] init];
         NSDictionary *upcomingEvent = [_schedule objectAtIndex:0];
         UInt64 absTime = [[upcomingEvent objectForKey:kTimeKey] unsignedLongLongValue];
         
-        pthread_mutex_unlock(&mutex);
+        [condition unlock];
         
         // sleep until we have to spinlock
         uint64_t wakeTime = (absTime - (kSpinlockTime / kAbsoluteToNanosecondsRatio));
+        NSLog(@"Arrived at mach_wait_until");
         mach_wait_until(wakeTime);
-        
+        NSLog(@"Made it past mach_wait_until");
         // make sure we haven't woken up early
         if (mach_absolute_time() >= wakeTime) {
             
@@ -232,12 +227,12 @@ void thread_sig(int signal) { }
                 [targetObject performSelector:selector];
             }
             // lock the mutex once more
-            pthread_mutex_lock(&mutex);
+            [condition lock];
             [_schedule removeObject:upcomingEvent];
         }
         else {
             // lock the mutex once more
-            pthread_mutex_lock(&mutex);
+            [condition lock];
         }
         
         

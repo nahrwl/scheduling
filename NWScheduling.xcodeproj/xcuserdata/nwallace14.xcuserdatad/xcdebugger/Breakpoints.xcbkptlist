@@ -4,11 +4,11 @@
    version = "1.0">
    <FileBreakpoints>
       <FileBreakpoint
-         shouldBeEnabled = "Yes"
+         shouldBeEnabled = "No"
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "NWSchedulingTest/main.m"
-         timestampString = "385798953.39091"
+         timestampString = "385802178.847032"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
          startingLineNumber = "42"
@@ -21,11 +21,11 @@
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "NWScheduling/NWScheduler.m"
-         timestampString = "385798313.810446"
+         timestampString = "385802334.549018"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "225"
-         endingLineNumber = "225"
+         startingLineNumber = "220"
+         endingLineNumber = "220"
          landmarkName = "-thread"
          landmarkType = "5">
       </FileBreakpoint>
@@ -34,20 +34,7 @@
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "NWScheduling/NWScheduler.m"
-         timestampString = "385798313.810446"
-         startingColumnNumber = "9223372036854775807"
-         endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "217"
-         endingLineNumber = "217"
-         landmarkName = "-thread"
-         landmarkType = "5">
-      </FileBreakpoint>
-      <FileBreakpoint
-         shouldBeEnabled = "Yes"
-         ignoreCount = "0"
-         continueAfterRunningActions = "No"
-         filePath = "NWScheduling/NWScheduler.m"
-         timestampString = "385798313.810446"
+         timestampString = "385802334.549018"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
          startingLineNumber = "211"
@@ -60,11 +47,11 @@
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "NWScheduling/NWScheduler.m"
-         timestampString = "385798313.810446"
+         timestampString = "385802334.549018"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "206"
-         endingLineNumber = "206"
+         startingLineNumber = "205"
+         endingLineNumber = "205"
          landmarkName = "-thread"
          landmarkType = "5">
       </FileBreakpoint>
@@ -73,11 +60,63 @@
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "NWScheduling/NWScheduler.m"
-         timestampString = "385798107.75366"
+         timestampString = "385802334.549018"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "124"
-         endingLineNumber = "124"
+         startingLineNumber = "201"
+         endingLineNumber = "201"
+         landmarkName = "-thread"
+         landmarkType = "5">
+      </FileBreakpoint>
+      <FileBreakpoint
+         shouldBeEnabled = "Yes"
+         ignoreCount = "0"
+         continueAfterRunningActions = "No"
+         filePath = "NWScheduling/NWScheduler.m"
+         timestampString = "385801929.417194"
+         startingColumnNumber = "9223372036854775807"
+         endingColumnNumber = "9223372036854775807"
+         startingLineNumber = "118"
+         endingLineNumber = "118"
+         landmarkName = "-addEvent:"
+         landmarkType = "5">
+      </FileBreakpoint>
+      <FileBreakpoint
+         shouldBeEnabled = "Yes"
+         ignoreCount = "0"
+         continueAfterRunningActions = "No"
+         filePath = "NWScheduling/NWScheduler.m"
+         timestampString = "385802334.549018"
+         startingColumnNumber = "9223372036854775807"
+         endingColumnNumber = "9223372036854775807"
+         startingLineNumber = "195"
+         endingLineNumber = "195"
+         landmarkName = "-thread"
+         landmarkType = "5">
+      </FileBreakpoint>
+      <FileBreakpoint
+         shouldBeEnabled = "Yes"
+         ignoreCount = "0"
+         continueAfterRunningActions = "No"
+         filePath = "NWScheduling/NWScheduler.m"
+         timestampString = "385802334.549018"
+         startingColumnNumber = "9223372036854775807"
+         endingColumnNumber = "9223372036854775807"
+         startingLineNumber = "194"
+         endingLineNumber = "194"
+         landmarkName = "-thread"
+         landmarkType = "5">
+      </FileBreakpoint>
+      <FileBreakpoint
+         shouldBeEnabled = "Yes"
+         ignoreCount = "0"
+         continueAfterRunningActions = "No"
+         filePath = "NWScheduling/NWScheduler.m"
+         timestampString = "385802334.549018"
+         startingColumnNumber = "9223372036854775807"
+         endingColumnNumber = "9223372036854775807"
+         startingLineNumber = "128"
+         endingLineNumber = "128"
          landmarkName = "-addEvent:"
          landmarkType = "5">
       </FileBreakpoint>
