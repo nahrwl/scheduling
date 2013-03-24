@@ -61,15 +61,15 @@ int main(int argc, const char * argv[])
         
         for (int i = 0; i < 5; i++) {
             NSTimeInterval duration = ((double)rand() / RAND_MAX) * 5.0; //returns ratio of random number and multipies it
-            NSLog(@"\nTimer will run for %f seconds.",duration);
+            NSLog(@"\n\nTimer will run for %f seconds.",duration);
             
             NSTimeInterval start = mach_absolute_time() * absToNs;
-            NSLog(@"%lf",start);
+            
             [NWScheduler scheduleEvent:@selector(timerFire) target:test inSeconds:duration];
         
             [NSThread sleepForTimeInterval:duration + 0.1];
             NSTimeInterval end = (test.absEnd) * absToNs;
-            NSLog(@"%lf",((end - start) / 1000000000) - duration);
+            NSLog(@"%lfs",((end - start) / 1000000000) - duration);
             
             //printf("NWScheduler thread deviation: %f\n",(test.end - start) - duration);
         }
